@@ -23,7 +23,7 @@ namespace RedPhoenix.Common.Handlers.Logger
         #region Private fields
         private static DateTime? _lastCheckDate = null;     // last removal date; Removal occurs once a day
 
-        // Thread lockers by filename. In case several threads try to write data in the same file
+        // Thread lockers by filename. In case several threads try to write (or read) data in the same file
         private static Dictionary<string, object> _fileLockers = new Dictionary<string, object>();
         private static object _deleteLocker = new object();
         #endregion
@@ -68,10 +68,10 @@ namespace RedPhoenix.Common.Handlers.Logger
                 Directory.CreateDirectory(LogDir);
 
             var fname = string.Format(FILENAME_FORMAT, DateTime.Now.ToString(DATE_FORMAT));
-            var fileName = LogDir + '\\' + fname;
+            var fullName = LogDir + '\\' + fname;
 
             lock (GetLockObj(fname))
-                using (var sw = new StreamWriter(fileName, true, LogEncoding))
+                using (var sw = new StreamWriter(fullName, true, LogEncoding))
                     sw.WriteLine(message);
         }
         #endregion

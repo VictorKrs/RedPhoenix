@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 
 namespace RedPhoenix.Common.Handlers
 {
     /// <summary>
-    /// Some common functions
+    /// Some common useful functions
     /// </summary>
     public static class PhoenixFunctions
     {
